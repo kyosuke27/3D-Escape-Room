@@ -1,0 +1,28 @@
+# assetsフォルダ全体を無視
+/assets/*
+
+# ただし、assets/scriptsフォルダ内は追跡
+!/assets/scripts/
+!/assets/scripts/**
+
+release_test
+release
+simulator
+# その他の一般的なunityの無視設定
+[ll]ibrary/
+[tt]emp/
+[bb]uild/
+[oo]bj/
+[ll]ogs/
+memorycaptures/
+projectsettings/
+usersettings/
+Recordings/
+
+
+# その他の設定
+.ds_store
+*.csproj
+*.unityproj
+*.sln
+*.userprefs
