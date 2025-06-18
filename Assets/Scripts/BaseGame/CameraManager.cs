@@ -144,7 +144,7 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(1.3f, 5.7f, -6.5f),
                 Rotation = Quaternion.Euler(9f, 133.0f, 0),
-                MoveNames = new MoveNames {Left="LastRoom"}
+                MoveNames = new MoveNames {Left="LastRoom",Right="LastRoomDoor"}
             }
         },
         {
@@ -153,16 +153,16 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(1.3f, 5.7f, -6.5f),
                 Rotation = Quaternion.Euler(9f, 218.0f, 0),
-                MoveNames = new MoveNames {Left="LastRoomTable"}
+                MoveNames = new MoveNames {Left="LastRoomDoor",Right="LastRoom"}
             }
         },
         {
             "LastRoomDoor",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(1.3f, 5.7f, -6.5f),
-                Rotation = Quaternion.Euler(9f, 218.0f, 0),
-                MoveNames = new MoveNames {Left="LastRoomTable"}
+                Position = new Vector3(1.6f, 6.0f, -12.5f),
+                Rotation = Quaternion.Euler(9f, 237.0f, 0),
+                MoveNames = new MoveNames {Left="LastRoomTable",Right="LastRoomTV"}
             }
         },
 
