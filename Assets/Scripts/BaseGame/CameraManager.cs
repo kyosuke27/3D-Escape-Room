@@ -299,7 +299,7 @@ public class CameraManager : MonoBehaviour
             new CameraPosition // カメラ位置
             {
                 Position = new Vector3(0.15f, 6.34f, -8.3f),
-                Rotation = Quaternion.Euler(20f, 127.0f, 0),
+                Rotation = Quaternion.Euler(20f, 117.0f, 0),
                 MoveNames = new MoveNames {Left="LastRoom",Right="LastRoomDoor"}
             }
         },
@@ -308,21 +308,82 @@ public class CameraManager : MonoBehaviour
             "LastRoomTableCountUp",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(0.15f, 6.34f, -8.3f),
-                Rotation = Quaternion.Euler(20f, 127.0f, 0),
-                MoveNames = new MoveNames {Left="LastRoom",Right="LastRoomDoor"}
+                Position = new Vector3(1.6f, 5.35f, -9.34f),
+                Rotation = Quaternion.Euler(73f, 90.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTable"}
             }
         },
-        // 最後の部屋
+        // 長いテーブルの大小が変化するボタン
+        {
+            "LastRoomTableBigSmall",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(1.7f, 5.35f, -9.88f),
+                Rotation = Quaternion.Euler(78.6f, 90.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTable"}
+            }
+        },
+        // ソファーの天気ボタン
+        {
+            "LastRoomSofaWeather",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(4.58f, 5.95f, -10.01f),
+                Rotation = Quaternion.Euler(77.35f, 90.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTable"}
+            }
+        },
+        // 最後の部屋のテレビ
         {
             "LastRoomTV",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(1.3f, 5.7f, -6.5f),
-                Rotation = Quaternion.Euler(9f, 218.0f, 0),
+                Position = new Vector3(1.03f, 5.7f, -7.32f),
+                Rotation = Quaternion.Euler(10f, 219.0f, 0),
                 MoveNames = new MoveNames {Left="LastRoomDoor",Right="LastRoom"}
             }
         },
+        // 最後部屋のテレビ台スライド式のボタン
+        {
+            "LastRoomTVMoveBar",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(-0.07f, 5.7f, -9.05f),
+                Rotation = Quaternion.Euler(55f, 269.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTV"}
+            }
+        },
+        // 最後部屋のテレビ台4*4
+        {
+            "LastRoomTVBall",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(-0.085f, 5.71f, -10.3f),
+                Rotation = Quaternion.Euler(46f, 270.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTV"}
+            }
+        },
+        // 最後部屋のテレビの記号ボタン
+        {
+            "LastRoomTVMark",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(1f, 4.5f, -9.12f),
+                Rotation = Quaternion.Euler(3.14f, 268.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTV"}
+            }
+        },
+        // TVスクリーン
+        {
+            "LastRoomTVScreen",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(1.6f, 6f, -9.7f),
+                Rotation = Quaternion.Euler(10f, 261.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTV"}
+            }
+        },
+
         {
             "LastRoomDoor",
             new CameraPosition // カメラ位置
