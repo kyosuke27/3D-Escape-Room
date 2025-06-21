@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class TapItemUse : TapColider
+//　アイテムを使ってオブジェクトに対して影響を及ぼし、移動も行う
+public class TapItemUseMove : TapColider
 {
     // タップされた時に所持しているオブジェクト
     //　アイテムをタップした際に、条件となるオブジェクトをと所持しているか判定するために
@@ -10,7 +11,9 @@ public class TapItemUse : TapColider
     // 使いやすいように配列に入れておく
     public GameObject[] ActiveObjects;
     // アイテムが選択すみかどうか判定するためのオブジェクト
-    public TapItemCollider SelectedObject;
+    // public TapItemCollider SelectedObject;
+    
+    public string MovePositionName; // 移動先の位置の名前
     
     protected override void OnTap()
     {
@@ -18,8 +21,9 @@ public class TapItemUse : TapColider
         // 自分とキーになっているオブジェクトがアクティブが確認する
         if (ItemImage.activeSelf) // activeSelfはオブジェクトがアクティブかどうかを判定する
         {
+            print("ItemImage.GetComponent<TapItemCollider>().IsSelected: " + ItemImage.GetComponent<TapItemCollider>().IsSelected);
             // アイテムがアクティブな状態でタップされた場合
-            if (SelectedObject.IsSelected)
+            if (ItemImage.GetComponent<TapItemCollider>().IsSelected)
             {
                 ItemImage.SetActive(false); // アイテムを使用したら非表示にする
                 // 自分自身も非表示にする
@@ -28,7 +32,9 @@ public class TapItemUse : TapColider
                 foreach (var obj in ActiveObjects)
                 {
                     obj.SetActive(true);
-                }        
+                }
+                // Camraの移動
+                CameraManager.Instance.ChangeCameraPosition(MovePositionName); // カメラを指定した位置に移動させる
             }
         }
     }

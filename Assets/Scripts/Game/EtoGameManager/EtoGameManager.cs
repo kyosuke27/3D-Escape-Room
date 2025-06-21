@@ -11,6 +11,10 @@ public class EtoGameManager : MonoBehaviour
     // ClearManagerの進行度を管理するためのProcessType
     public ProcessType processType;
 
+    // ゲームクリア時に表示するオブジェクト
+    public GameObject ItemPanel;
+    
+
     void Update()
     {
         // クリアしている場合には終了
@@ -46,6 +50,6 @@ public class EtoGameManager : MonoBehaviour
     {
         // ここにアイテム取得の処理を追加する
         // 例えば、アイテムをインベントリに追加するなど
-        Debug.Log("アイテムを取得しました。");
+        ItemPanel.SetActive(true); // アイテムパネルをアクティブにする
     }
 }

@@ -7,8 +7,8 @@ public class TapItemCollider : MonoBehaviour
     public bool IsSelected = false; // タップされているかどうか
     // タップされた際に表示するアイテムの詳細画面オブジェクト
     public GameObject ItemDetailPanel;
-    // 詳細画面に表示するアイテムの画像
-    public Image ItemImage;
+    // ItemDetailPanelの子要素の画像コンポーネントに設定するために必要なオブジェクト
+    public Image PanelImage;
     void Start()
     {
         // 自分のオブジェクトにたいしてEventTiggerを追加する

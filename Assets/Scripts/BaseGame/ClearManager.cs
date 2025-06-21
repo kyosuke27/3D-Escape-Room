@@ -45,5 +45,19 @@ public class ClearManager : MonoBehaviour
             Debug.LogError($"ProcessType {type} does not exist in the progress dictionary.");
         }
     }
+
+    // 解決していないProcessTypeを一つ返す
+    public ProcessType? GetUnsolvedProcessType()
+    {
+        foreach (var kvp in _progress)
+        {
+            if (!kvp.Value) // 未解決のProcessTypeを見つけたら返す
+            {
+                return kvp.Key;
+            }
+        }
+        // 全て解決済みの場合はnullを返す
+        return null; 
+    }
     
 }

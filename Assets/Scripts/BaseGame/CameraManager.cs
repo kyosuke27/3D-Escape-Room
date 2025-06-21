@@ -94,7 +94,7 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(-7.0f, 6.0f, -3.0f),
                 Rotation = Quaternion.Euler(18.0f, 300.0f, 0),
-                MoveNames = new MoveNames { Left = "BedRoomDoorOpen", Right = "BedRoomMain"}
+                MoveNames = new MoveNames { Left = "BedRoomDoor", Right = "BedRoomMain"}
             }
         },
         {
