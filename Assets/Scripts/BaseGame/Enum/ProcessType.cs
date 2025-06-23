@@ -7,5 +7,11 @@ public enum ProcessType
     // 矢印ボタンをクリアしているか？
     ArrowGame,
     // 最後の部屋のドアを開けているか？
-    LastRoom
+    // LastRoom
+    // ボールの色と石の色を揃える
+    StoneTouch,
+    // カップの向きを合わせるゲーム
+    CupGame,
+    // 天気ゲーム
+    WeatherGame
 }

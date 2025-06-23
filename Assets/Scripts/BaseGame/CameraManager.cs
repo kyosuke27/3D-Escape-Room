@@ -13,7 +13,6 @@ public class CameraManager : MonoBehaviour
     public GameObject ButtonLeft;
     public GameObject ButtonRight;
     public GameObject ButtonBack;
-    public GameObject ButtonUp;
 
     // <summary>
     // カメラの位置を格納を格納するためのクラス
@@ -38,8 +37,6 @@ public class CameraManager : MonoBehaviour
         public string Right { get; set; }
         // 下ボタンを押したときの移動先
         public string Back { get; set; }
-        // 上ボタンを押したときの移動先
-        public string Up {get;set;}
     }
 
     // 移動先の座標を格納したリスト
@@ -77,10 +74,19 @@ public class CameraManager : MonoBehaviour
                 MoveNames = new MoveNames { Back="BedRoomMain"}
             }
         },
-
         // 金庫
         {
             "BedRoomSafe",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(-7.75f, 4.45f, -0.885f),
+                Rotation = Quaternion.Euler(17f, -267.0f, 0.015f),
+                MoveNames = new MoveNames { Back="BedRoomMain"}
+            }
+        },
+    // 金庫が開いた時のポジション
+        {
+            "BedRoomSafeOpen",
             new CameraPosition // カメラ位置
             {
                 Position = new Vector3(-7.75f, 4.45f, -0.885f),
@@ -106,13 +112,14 @@ public class CameraManager : MonoBehaviour
                 MoveNames = new MoveNames { Left = "BedRoomMain", Right = "BedRoomImageAndTable"}
             }
         },
+        // ベッドルームの扉が開いた時の位置
         {
             "BedRoomDoorOpen",
             new CameraPosition // カメラ位置
             {
                 Position = new Vector3(-10.0f, 6.0f, 0.4f),
                 Rotation = Quaternion.Euler(9.2f, 180.0f, 0),
-                MoveNames = new MoveNames { Left = "BedRoomMain", Right = "BedRoomImageAndTable",Up="Corridor"}
+                MoveNames = new MoveNames { Left = "BedRoomMain", Right = "BedRoomImageAndTable"}
             }
         },
         // ベッドルームのテーブル
@@ -163,7 +170,7 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(-10.0f, 6.0f, -2.9f),
                 Rotation = Quaternion.Euler(21.0f, 180.0f, 0),
-                MoveNames = new MoveNames {Back="BedRoomDoorOpen",Right="CorridorBack",Left="CorridorFront"}
+                MoveNames = new MoveNames {Back="BedRoomDoor",Right="CorridorBack",Left="CorridorFront"}
             }
         },
         // 廊下の引き出し
@@ -194,7 +201,7 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(-10.0f, 5.85f, -4.15f),
                 Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
-                MoveNames = new MoveNames {Back="Corridor",Up="CorridorDoorOpen"}
+                MoveNames = new MoveNames {Back="Corridor"}
             }
         },
         // 廊下の椅子にある矢印ボタン
@@ -260,7 +267,7 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(-5.45f, 5.85f, -4.15f),
                 Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
-                MoveNames = new MoveNames {Back="CorridorFront",Up="LastRoom"}
+                MoveNames = new MoveNames {Back="CorridorFront"}
             }
         },
         // 最後の部屋
@@ -270,7 +277,27 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(-0.8f, 5.85f, -4.15f),
                 Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
-                MoveNames = new MoveNames {Back="CorridorDoorOpen",Right="LastRoomTable"}
+                MoveNames = new MoveNames {Back="CorridorDoor",Right="LastRoomTable"}
+            }
+        },
+        // 最後の部屋の正面にある金庫
+        {
+            "LastRoomSafe",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(4.09f, 4.31f, -3.64f),
+                Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
+                MoveNames = new MoveNames {Back="LastRoom"}
+            }
+        },
+        // 最後の部屋の正面にある金庫が開かれた位置
+        {
+            "LastRoomSafeOpen",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(4.09f, 4.31f, -3.64f),
+                Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
+                MoveNames = new MoveNames {Back="LastRoom"}
             }
         },
         // 最後の部屋のテーブル
@@ -383,14 +410,24 @@ public class CameraManager : MonoBehaviour
                 MoveNames = new MoveNames {Back="LastRoomTV"}
             }
         },
-
+        // 最後の部屋のドア
         {
             "LastRoomDoor",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(1.6f, 6.0f, -12.5f),
+                Position = new Vector3(2.551f, 6.18f, -11.882f),
                 Rotation = Quaternion.Euler(9f, 237.0f, 0),
                 MoveNames = new MoveNames {Left="LastRoomTable",Right="LastRoomTV"}
+            }
+        },
+        // 最後の部屋のドアの隣の棚のカップ
+        {
+            "LastRoomDoorTableCup",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(0.2f, 4.8f, -12.99f),
+                Rotation = Quaternion.Euler(5f, 270.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomDoor"}
             }
         },
 
@@ -417,11 +454,6 @@ public class CameraManager : MonoBehaviour
             // Rightボタンが押されたときの処理
             ChangeCameraPosition(cameraPositionInfos[CurrentPositionName].MoveNames.Right);
         });
-        ButtonUp.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            // Rightボタンが押されたときの処理
-            ChangeCameraPosition(cameraPositionInfos[CurrentPositionName].MoveNames.Up);
-        });
 
     }
 
@@ -445,6 +477,5 @@ public class CameraManager : MonoBehaviour
         ButtonLeft.SetActive(cameraPositionInfos[CurrentPositionName].MoveNames.Left != null);
         ButtonRight.SetActive(cameraPositionInfos[CurrentPositionName].MoveNames.Right != null);
         ButtonBack.SetActive(cameraPositionInfos[CurrentPositionName].MoveNames.Back != null);
-        ButtonUp.SetActive(cameraPositionInfos[CurrentPositionName].MoveNames.Up!= null);
     }
 }

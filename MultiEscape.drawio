@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9" pages="4">
   <diagram name="フローチャート" id="RXGRm931TFEpD4JKADuY">
-    <mxGraphModel dx="2864" dy="1227" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2178" dy="970" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -22,7 +22,7 @@
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-121" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-8" target="JhcOgVqaA8dTqpc5jkcz-104" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JhcOgVqaA8dTqpc5jkcz-8" value="３✖️３ボタン" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" parent="1" vertex="1">
+        <mxCell id="JhcOgVqaA8dTqpc5jkcz-8" value="4✖️4ボタン" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" parent="1" vertex="1">
           <mxGeometry x="480" y="1020" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-138" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-10" target="JhcOgVqaA8dTqpc5jkcz-43" edge="1">
@@ -65,7 +65,7 @@
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-140" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-47" target="JhcOgVqaA8dTqpc5jkcz-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JhcOgVqaA8dTqpc5jkcz-47" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;ヒントノート&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;・記号&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;・色の組み合わせ&lt;/span&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
+        <mxCell id="JhcOgVqaA8dTqpc5jkcz-47" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;ヒントノート&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;・記号(半分だけ)&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;・色の組み合わせ&lt;/font&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
           <mxGeometry x="740" y="72.5" width="185" height="180" as="geometry" />
         </mxCell>
         <mxCell id="Qinczm0bO9-p7GrukP_N-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="JhcOgVqaA8dTqpc5jkcz-51" target="Qinczm0bO9-p7GrukP_N-4">
@@ -82,7 +82,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-53" value="カップの持ち手の向き" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" parent="1" vertex="1">
-          <mxGeometry x="590" y="610" width="140" height="50" as="geometry" />
+          <mxGeometry x="579" y="770" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-55" target="JhcOgVqaA8dTqpc5jkcz-57" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -139,16 +139,25 @@
           <mxGeometry x="1070" y="7.5" width="130" height="65" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-81" target="JhcOgVqaA8dTqpc5jkcz-83" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="230" />
+              <mxPoint x="330" y="230" />
+              <mxPoint x="330" y="300" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-81" value="部屋の鍵" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="1" vertex="1">
-          <mxGeometry x="374" y="90" width="80" height="80" as="geometry" />
+          <mxGeometry x="270" y="110" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-83" target="JhcOgVqaA8dTqpc5jkcz-85" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-83" value="&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;部屋の扉を開ける&lt;/span&gt;&lt;/font&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="1" vertex="1">
-          <mxGeometry x="315" y="270" width="110" height="60" as="geometry" />
+          <mxGeometry x="264" y="270" width="126" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uvR8T53SzWybYBF36_p6-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="JhcOgVqaA8dTqpc5jkcz-85" target="uvR8T53SzWybYBF36_p6-2">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-85" value="日付を合わせる" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" parent="1" vertex="1">
           <mxGeometry x="150" y="430" width="110" height="40" as="geometry" />
@@ -259,7 +268,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-143" value="&lt;font color=&quot;#000000&quot;&gt;丸いボール３つが置かれている&lt;/font&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#99FF99;fontColor=#ffffff;strokeColor=#6F0000;" parent="1" vertex="1">
-          <mxGeometry x="1010" y="570" width="180" height="70" as="geometry" />
+          <mxGeometry x="1010" y="600" width="180" height="70" as="geometry" />
         </mxCell>
         <mxCell id="JhcOgVqaA8dTqpc5jkcz-148" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="JhcOgVqaA8dTqpc5jkcz-145" target="JhcOgVqaA8dTqpc5jkcz-147" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -315,6 +324,12 @@
         </mxCell>
         <mxCell id="g502Kq9QdGE5RNnN7VZz-1" value="&lt;font color=&quot;#000000&quot;&gt;記号組み合わせ表の半分だけ&lt;/font&gt;" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#99FF99;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
           <mxGeometry x="1045" y="1350" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uvR8T53SzWybYBF36_p6-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="uvR8T53SzWybYBF36_p6-2" target="JhcOgVqaA8dTqpc5jkcz-143">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uvR8T53SzWybYBF36_p6-2" value="ボール" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="1">
+          <mxGeometry x="180" y="530" width="80" height="85" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
@@ -426,7 +441,7 @@
         <mxCell id="qBNEiTYim_y8xr-pEqVV-1" value="・カップの持ち手の向き&lt;div&gt;・4✖️4の石のヒント&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
           <mxGeometry x="330" y="630" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="3cH-8lGUJdX-nHX-psue-1" value="・日付を合わせる&lt;div&gt;・ボール&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;rotation=-90;" vertex="1" parent="1">
+        <mxCell id="3cH-8lGUJdX-nHX-psue-1" value="・日付を合わせる&lt;div&gt;・ボール&lt;/div&gt;&lt;div&gt;・水&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;rotation=-90;" vertex="1" parent="1">
           <mxGeometry x="533.5" y="315" width="115" height="50" as="geometry" />
         </mxCell>
         <mxCell id="PzmVh5bs7jr-pi4SXrDa-1" value="矢印ボタン" style="whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;rounded=0;" vertex="1" parent="1">
@@ -441,7 +456,7 @@
         <mxCell id="7Ukf-NYoTFSZ1pA2qI-A-1" value="・スライド式のボタン&lt;div&gt;・4✖️4ボタン&lt;/div&gt;&lt;div&gt;・●❌▪️🔼ボタン&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
           <mxGeometry x="680" y="-185" width="200" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="uBPPBeUQkpEae6APZeum-1" value="・天気予報ボタン" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
+        <mxCell id="uBPPBeUQkpEae6APZeum-1" value="・天気予報ボタン&lt;div&gt;・カップの向き&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" vertex="1" parent="1">
           <mxGeometry x="600" y="-700" width="200" height="60" as="geometry" />
         </mxCell>
         <mxCell id="2FqBxLSq6X_CCV4HAO_T-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2FqBxLSq6X_CCV4HAO_T-1" target="2FqBxLSq6X_CCV4HAO_T-3">

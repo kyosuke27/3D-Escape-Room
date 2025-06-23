@@ -45,7 +45,7 @@ public class HintAnswerPanelManager : MonoBehaviour
     // ヒントボタンが押されたときの処理
     public void HintButton()
     {
-        HintAnswerPanel.SetActive(true); // ヒント・回答パネルを表示する
+        HintAnswerPanel.SetActive(false); // ヒント・回答パネルを表示する
         // 解決していないProcessTypeの方を返す
         ProcessType? unsolvedProcessType = ClearManager.Instance.GetUnsolvedProcessType();
         print($"Unsolved ProcessType: {unsolvedProcessType}");
