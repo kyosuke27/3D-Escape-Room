@@ -13,5 +13,19 @@ public enum ProcessType
     // カップの向きを合わせるゲーム
     CupGame,
     // 天気ゲーム
-    WeatherGame
+    WeatherGame,
+    // 動くバーゲーム
+    MoveBar,
+    // 色が競り上がっていくゲーム
+    BlackUpGame,
+    // 鳥の像をおいているか？
+    BirdStatue,
+    // マグカップとポッドの位置
+    CupPodPosition,
+    // 時計の時刻を合わせるゲーム
+    TapDate,
+    // 大きさの変わる円ボタン
+    BigSmallCircle,
+    // 記号が付いたボタン
+    MarkGame,
 }

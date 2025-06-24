@@ -69,7 +69,7 @@ public class CameraManager : MonoBehaviour
             "BedRoomDrawer",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(-7.3f, 4.9f, -1.4f),
+                Position = new Vector3(-7.3f, 5f, -1.4f),
                 Rotation = Quaternion.Euler(14f, -325.0f, 0),
                 MoveNames = new MoveNames { Back="BedRoomMain"}
             }
@@ -184,13 +184,23 @@ public class CameraManager : MonoBehaviour
                 MoveNames = new MoveNames {Back="Corridor"}
             }
         },
-        // バスケットボール
+        // 大小のボール
         {
             "CorridorDrawerBall",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(-10.0f, 5.0f, -4.1f),
-                Rotation = Quaternion.Euler(21.0f, -180.0f, 0),
+                Position = new Vector3(-10.0f, 4.88f, -4.07f),
+                Rotation = Quaternion.Euler(-4.09f, 180.0f, 0),
+                MoveNames = new MoveNames {Back="Corridor"}
+            }
+        },
+        // 廊下の棚に置かれたコップ
+        {
+            "CorridorDrawerGlass",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(-10.0f, 4.3f, -4.07f),
+                Rotation = Quaternion.Euler(-4.09f, 180.0f, 0),
                 MoveNames = new MoveNames {Back="Corridor"}
             }
         },
@@ -277,7 +287,7 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(-0.8f, 5.85f, -4.15f),
                 Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
-                MoveNames = new MoveNames {Back="CorridorDoor",Right="LastRoomTable"}
+                MoveNames = new MoveNames {Back="CorridorDoor",Right="LastRoomTable",Left="LastRoomTV"}
             }
         },
         // 最後の部屋の正面にある金庫
@@ -285,7 +295,7 @@ public class CameraManager : MonoBehaviour
             "LastRoomSafe",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(4.09f, 4.31f, -3.64f),
+                Position = new Vector3(4.53f, 4.37f, -3.64f),
                 Rotation = Quaternion.Euler(9.2f, 91.5f, 0),
                 MoveNames = new MoveNames {Back="LastRoom"}
             }
@@ -315,7 +325,7 @@ public class CameraManager : MonoBehaviour
             "LastRoomWineLackWall",
             new CameraPosition // カメラ位置
             {
-                Position = new Vector3(3.37f, 6.65f, -4.15f),
+                Position = new Vector3(3f, 6.65f, -4.31f),
                 Rotation = Quaternion.Euler(9.2f, 92f, 0),
                 MoveNames = new MoveNames {Back="LastRoom"}
             }
@@ -357,6 +367,16 @@ public class CameraManager : MonoBehaviour
             {
                 Position = new Vector3(4.58f, 5.95f, -10.01f),
                 Rotation = Quaternion.Euler(77.35f, 90.0f, 0),
+                MoveNames = new MoveNames {Back="LastRoomTable"}
+            }
+        },
+        // ソファーの近くの記号の絵
+        {
+            "LastRoomSofaPicture",
+            new CameraPosition // カメラ位置
+            {
+                Position = new Vector3(3.51f, 6.6f, -10.16f),
+                Rotation = Quaternion.Euler(16.85f, 88.0f, 0),
                 MoveNames = new MoveNames {Back="LastRoomTable"}
             }
         },
