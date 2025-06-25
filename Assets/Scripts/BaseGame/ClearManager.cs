@@ -143,26 +143,67 @@ public class ClearManager : MonoBehaviour
                     _showActionObject[ActionType.BedRoomSafe][2].SetActive(false); // 金庫の中身を取り出すアクションを表示
                 }
                 break;
+            // 最後の部屋の金庫
+            case ActionType.LastRoomSafe:
+                if (value == 1)
+                {
+                    // しまっている扉
+                    _showActionObject[ActionType.LastRoomSafe][0].SetActive(false); // 金庫を開けるアクションを表示
+                    // 開いている扉
+                    _showActionObject[ActionType.LastRoomSafe][1].SetActive(true); // 金庫を開けるアクションを表示
+                }
+                    break;
             case ActionType.TV:
-                // CupGameのアクションを取得
+                // TVのアクションを変化
+                // TVがついている
+                if (value == 1)
+                {
+                    // 黒色画面
+                    _showActionObject[ActionType.TV][0].SetActive(false); // TVが消えているアクションを非表示
+                    // TVがついている
+                    _showActionObject[ActionType.TV][1].SetActive(true); // TVがついているアクションを表示
+                }
                 break;
             case ActionType.BedRoomDrawer:
                 // WeatherGameのアクションを取得
                 break;
             case ActionType.WineGlass:
-                // MoveBarのアクションを取得
+                // ワイングラスの初期設定
+                if (value == 1)
+                {
+                    // ワイングラスにワインが注がれている
+                    // 液体の部分を表示する
+                    _showActionObject[ActionType.WineGlass][0].SetActive(true); // ワイングラスにワインが注がれているアクションを表示
+                    _showActionObject[ActionType.WineGlass][1].SetActive(true); // ワイングラスにワインが注がれているアクションを表示
+                    _showActionObject[ActionType.WineGlass][2].SetActive(true); // ワイングラスにワインが注がれているアクションを表示
+                }
                 break;
             case ActionType.Ball:
                 // BlackUpGameのアクションを取得
                 break;
             case ActionType.SilverBirdStatue:
-                // BirdStatueのアクションを取得
+                // 銀の鳥の像が置かれている場合
+                if (value == 1)
+                {
+                    // 銀の鳥の像が置かれている
+                    _showActionObject[ActionType.SilverBirdStatue][0].SetActive(true);
+                }
                 break;
             case ActionType.GoldBirdStatue:
-                // CupPodPositionのアクションを取得
+                // 金の鳥の像が置かれている場合
+                if (value == 1)
+                {
+                    // 金の鳥の像が置かれている
+                    _showActionObject[ActionType.GoldBirdStatue][0].SetActive(true); // 金の鳥の像が置かれているアクションを表示
+                }
                 break;
             case ActionType.WhiteMugCup:
-                // TapDateのアクションを取得
+                // WhiteMugCupの状態によって表示を分岐
+                if (value == 1)
+                {
+                    // 白いマグカップが置かれている
+                    _showActionObject[ActionType.WhiteMugCup][0].SetActive(true); // 白いマグカップが置かれているアクションを表示
+                }
                 break;
             case ActionType.LastActionKey:
                 // BigSmallCircleのアクションを取得
@@ -248,33 +289,32 @@ public class ClearManager : MonoBehaviour
             case ProcessType.CupGame:
                 // CupGameの処理をここに追加
                 CupGameManager cupGameManager = GameManagers[(int)ProcessType.CupGame].GetComponent<CupGameManager>();
-                // cupGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                cupGameManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.WeatherGame:
                 // WeatherGameの処理をここに追加
                 WeatherGameManager weatherGameManager = GameManagers[(int)ProcessType.WeatherGame].GetComponent<WeatherGameManager>();
-                // weatherGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                weatherGameManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.MoveBar:
                 // MoveBarの処理をここに追加
                 MoveBarManager moveBarManager = GameManagers[(int)ProcessType.MoveBar].GetComponent<MoveBarManager>();
-                // moveBarManager.GameClear(); // ゲームクリア              
+                moveBarManager.GameClear(); // ゲームクリア              
                 break;
             case ProcessType.BlackUpGame:
                 // BlackUpGameの処理をここに追加
                 BlackUpGameManager blackUpGameManager = GameManagers[(int)ProcessType.BlackUpGame].GetComponent<BlackUpGameManager>();
-                // blackUpGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                blackUpGameManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.BirdStatue:
                 // BirdStatueの処理をここに追加
-
                 LastRoomSafeManager birdStatueManager = GameManagers[(int)ProcessType.BirdStatue].GetComponent<LastRoomSafeManager>();
-                // birdStatueManager.GameClear(); // ゲームクリアの処理を呼び出す
+                birdStatueManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.CupPodPosition:
                 // CupPodPositionの処理をここに追加
                 CupPodManager cupPodPositionManager = GameManagers[(int)ProcessType.CupPodPosition].GetComponent<CupPodManager>();
-                // cupPodPositionManager.GameClear(); // ゲームクリアの処理を呼び出す
+                cupPodPositionManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.TapDate:
                 // TapDateの処理をここに追加
@@ -390,7 +430,6 @@ public class ClearManager : MonoBehaviour
     // Itemsデータのみ保存する
     public void SaveItems()
     {
-        print("ClearManager Save Items");
         // SaveDataのprocess配列に進行度を保存
         for (int i = 0; i < (int)ItemType.LastItemKey; i++)
         {
@@ -435,11 +474,16 @@ public class ClearManager : MonoBehaviour
     // アイテムの取得状況を更新する
     public void SetItems(ItemType type, bool condition)
     {
+        print("ClearManager SetItems==================");
+        print("ItemType: " + type + ", Condition: " + condition);
+        print("Current Item Value: " + _items[type]);
         // 進行度を設定する
         if (_items.ContainsKey(type))
         {
+            print("ClearManager SetItems: " + type + " is set to " + condition);
             // 完了済みにする
             _items[type] = condition;
+            print("_items[" + type + "] = " + _items[type]);
         }
         else //念の為キーが存在しない場合のエラーハンドリング
         {

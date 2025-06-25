@@ -38,6 +38,8 @@ public class BlackUpGameManager : GameManagerBase
         isClear = true;
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // 金の鳥の像を取得したことを通知
+        ClearManager.Instance.SetItems(ItemType.GoldBirdStatue, true);
         // ブロックを非活性にする
         foreach (var tapObject in countUpBlocks)
         {
@@ -48,15 +50,35 @@ public class BlackUpGameManager : GameManagerBase
         }
         GetClear(); // アイテム取得などの処理を呼び出す
     }
-    
+
     protected override void GetClear()
     {
-        Debug.Log("BlackUpGameManager: GetClear called");
         // ここにアイテム取得の処理を追加する
         // 例えば、アイテムをインベントリに追加するなど
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < countUpBlocks.Length; i++)
+        {
+            if(ClearIndexs[i])
+            {
+                countUpBlocks[i].CheckBlock(); // 黒に設定
+            }
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in countUpBlocks)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する
         }
     }
 }

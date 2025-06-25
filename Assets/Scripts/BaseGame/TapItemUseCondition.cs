@@ -13,10 +13,19 @@ public class TapItemUseCondition : TapColider
     // 指定したオブジェクトの活性化状態を確認して、アイテムを使用するかどうかを決定する
     public GameObject ConditionObject;
     
+    // 使用したアイテムを識別するためにItemTypsを設定する
+    public ItemType ItemType;
+
+    // ActionTypeを設定する
+    public ActionType ActionType;
+    // Actionが起きた後の値を設定する
+    // Actionごとに個別に設定する
+    public int ActionValue;
+    
     protected override void OnTap()
     {
         base.OnTap();
-        if(!ConditionObject.activeSelf) return; // 条件オブジェクトが非アクティブな場合は何もしない
+        if (!ConditionObject.activeSelf) return; // 条件オブジェクトが非アクティブな場合は何もしない
         // 自分とキーになっているオブジェクトがアクティブが確認する
         if (ItemImage.activeSelf) // activeSelfはオブジェクトがアクティブかどうかを判定する
         {
@@ -28,7 +37,10 @@ public class TapItemUseCondition : TapColider
                 foreach (var obj in ActiveObjects)
                 {
                     obj.SetActive(true);
-                }        
+                }
+                // アイテムの使用を通知する
+                ClearManager.Instance.SetItems(ItemType, false);
+                ClearManager.Instance.SetAction(ActionType, ActionValue); // Actionの通知
             }
         }
     }

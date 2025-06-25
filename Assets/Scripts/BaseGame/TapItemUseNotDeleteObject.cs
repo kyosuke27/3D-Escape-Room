@@ -10,8 +10,17 @@ public class TapItemUseNotDeleteObject : TapColider
     // 使いやすいように配列に入れておく
     public GameObject[] ActiveObjects;
     
+    // 使用したアイテムを識別するためにItemTypsを設定する
+    public ItemType ItemType;
+    // ActionTypeを設定する
+    public ActionType ActionType;
+    // Actionが起きた後の値を設定する
+    // Actionごとに個別に設定する
+    public int ActionValue;
+    
     protected override void OnTap()
     {
+        print("TapItemUseNotDeleteObject OnTap called");
         base.OnTap();
         // 自分とキーになっているオブジェクトがアクティブが確認する
         if (ItemImage.activeSelf) // activeSelfはオブジェクトがアクティブかどうかを判定する
@@ -19,12 +28,18 @@ public class TapItemUseNotDeleteObject : TapColider
             // アイテムがアクティブな状態でタップされた場合
             if (ItemImage.GetComponent<TapItemCollider>().IsSelected)
             {
+                print("*********");
+                // アイテムの使用を通知する
+                ClearManager.Instance.SetItems(ItemType, false);
+                // Actionの通知
+                ClearManager.Instance.SetAction(ActionType, ActionValue);
                 ItemImage.SetActive(false); // アイテムを使用したら非表示にする
                 // 表示するオブジェクトをアクティブにする
                 foreach (var obj in ActiveObjects)
                 {
                     obj.SetActive(true);
-                }        
+                }
+                
             }
         }
     }

@@ -27,6 +27,8 @@ public class MoveBarManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // アイテムをゲットしたことを通知
+        ClearManager.Instance.SetItems(ItemType.WineBottle, true); // ベッド
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
@@ -46,6 +48,24 @@ public class MoveBarManager : GameManagerBase
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            tapObjects[i].SetIndex(ClearIndexNumbers[i]); // 正解のインデックスに設定
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in tapObjects)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する
         }
     }
 }

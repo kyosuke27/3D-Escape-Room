@@ -16,6 +16,8 @@ public class CupPodManager : GameManagerBase
 
     // 判定する対象のオブジェクト
     public TapObjectChange[] tapObjects;
+    
+    // 
 
     void Update()
     {
@@ -34,6 +36,8 @@ public class CupPodManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // クリアした際に、鍵が手に入るので通知する
+        ClearManager.Instance.SetItems(ItemType.BedLoomDrawerKey, true); // CupPodの白いマグカップを取得したことを通知
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
@@ -45,7 +49,7 @@ public class CupPodManager : GameManagerBase
 
         GetClear(); // アイテム取得などの処理を呼び出す
     }
-    
+
     protected override void GetClear()
     {
         Debug.Log("CupPodManager: GetClear called");
@@ -54,6 +58,26 @@ public class CupPodManager : GameManagerBase
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提   
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for(int i = 0; i < tapObjects.Length; i++)
+        {
+            // tapObjectsのIndexをClearIndexに設定する
+            tapObjects[i].SetIndex(ClearIndexs[i]);
+        }
+
+        // アクティブなオブジェクトを非アクティブにする
+        foreach (var obj in tapObjects)
+        {
+            obj.enabled = false; // オブジェクトを無効化する
+            obj.GetComponent<Collider>().enabled = false; // colliderを無効化する
         }
     }
 }

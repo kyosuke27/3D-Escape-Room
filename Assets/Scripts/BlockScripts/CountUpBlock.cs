@@ -12,12 +12,12 @@ public class CountUpBlock : MonoBehaviour
     public Material[] materials;
     
     // 自分自身のMaterial
-    private Renderer _renderer;
+    public Renderer _renderer;
     
-    void Start()
-    {
-        _renderer = GetComponent<Renderer>();
-    }
+    // void Start()
+    // {
+    //     _renderer = GetComponent<Renderer>();
+    // }
     
     public void CheckBlock()
     {

@@ -26,6 +26,8 @@ public class CupGameManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // TVリモコンを取得したことを通知
+        ClearManager.Instance.SetItems(ItemType.RemoController, true); // TVリモコン
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
@@ -36,7 +38,7 @@ public class CupGameManager : GameManagerBase
         }
         GetClear(); // アイテム取得などの処理を呼び出す
     }
-    
+
     protected override void GetClear()
     {
         Debug.Log("CupGameManager: GetClear called");
@@ -45,6 +47,24 @@ public class CupGameManager : GameManagerBase
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            tapObjects[i].Index = ClearIndexNumbers[i]; // 正解のIndexに設定する
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in tapObjects)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する 
         }
     }
 }
