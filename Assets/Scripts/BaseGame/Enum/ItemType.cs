@@ -25,6 +25,8 @@ public enum ItemType
     // 記号メモ
     MarkMemo,
     // 外にでる鍵
-    LastRoomOutKey
+    LastRoomOutKey,
+    // 内部的に使用するためのKey
+    LastItemKey
 
 }

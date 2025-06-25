@@ -21,12 +21,6 @@ public class ClearManager : MonoBehaviour
     // 未終了：false 
     // 終了：true
     private Dictionary<ProcessType, bool> _progress = new();
-
-    // アイテムの取得状況を表すデータクラス
-    // ItemTypeと取得しているか判定するためのbool値が入っている
-    // 持っていない：　false
-    // 持っている:true
-    private Dictionary<ItemType, bool> _items = new();
     public static ClearManager Instance { get; private set; }
 
 
@@ -49,7 +43,7 @@ public class ClearManager : MonoBehaviour
     {
         print("ClearManager Start");
         // セーブデータが存在する場合はロードする
-        Load();
+        LoadProgress();
 
         // 各GameManagerの初期化
         foreach (var p in _progress)
@@ -60,7 +54,6 @@ public class ClearManager : MonoBehaviour
                 ClearGimic(p.Key); // ゲームクリアの処理を呼び出す    
             }
         }
-        // Itemを取得の初期化
     }
 
     private void ClearGimic(ProcessType p)
@@ -140,7 +133,7 @@ public class ClearManager : MonoBehaviour
     }
 
     // セーブデータをロードする
-    public void Load()
+    public void LoadProgress()
     {
         // 以下はセーブデータをロードしてprocessを初期化する処理
         saveData = new SaveData();
@@ -156,12 +149,6 @@ public class ClearManager : MonoBehaviour
                 // ProcessTypeの数だけループして進行度を設定
                 _progress[(ProcessType)i] = saveData.process[i];
             }
-            // Itemsを初期化する
-            for (int i = 0; i < (int)ItemType.LastItemKey; i++)
-            {
-                // ProcessTypeの数だけループして進行度を設定
-                _items[(ItemType)i] = saveData.items[i];
-            }
         }
         else
         {
@@ -170,11 +157,6 @@ public class ClearManager : MonoBehaviour
             {
                 // ProcessTypeの数だけループして進行度を設定
                 _progress[(ProcessType)i] = false; // 全て未解決に設定
-            }
-            for (int i = 0; i < (int)ItemType.LastItemKey; i++)
-            {
-                // ProcessTypeの数だけループして進行度を設定
-                _items[(ItemType)i] = false;
             }
             Save(); // 初期化後にセーブ
         }
@@ -189,46 +171,12 @@ public class ClearManager : MonoBehaviour
         {
             saveData.process[i] = _progress[(ProcessType)i];
         }
-        // SaveDateのitemsを更新する
-        for (int i = 0; i < (int)ItemType.LastItemKey; i++)
-        {
-            saveData.items[i] = _items[(ItemType)i];
-        }
-        // JSON形式に変換してPlayerPrefsに保存
-        string json = JsonUtility.ToJson(saveData);
-        PlayerPrefs.SetString(SAVE_KEY, json);
-    }
-
-    // SaveDataを保存する
-    // Progressデータのみ保存する
-        public void SaveProgress()
-    {
-        print("ClearManager Save Progress");
-        // SaveDataのprocess配列に進行度を保存
-        for (int i = 0; i < (int)ProcessType.LastProcessType; i++)
-        {
-            saveData.process[i] = _progress[(ProcessType)i];
-        }
 
         // JSON形式に変換してPlayerPrefsに保存
         string json = JsonUtility.ToJson(saveData);
         PlayerPrefs.SetString(SAVE_KEY, json);
     }
-    // SaveDataを保存する
-    // Itemsデータのみ保存する
-        public void SaveItems()
-    {
-        print("ClearManager Save Items");
-        // SaveDataのprocess配列に進行度を保存
-        for (int i = 0; i < (int)ItemType.LastItemKey; i++)
-        {
-            saveData.items[i] = _items[(ItemType)i];
-        }
 
-        // JSON形式に変換してPlayerPrefsに保存
-        string json = JsonUtility.ToJson(saveData);
-        PlayerPrefs.SetString(SAVE_KEY, json);
-    }
 
     // 進行度を更新
     public void SetProgress(ProcessType type)
@@ -243,23 +191,7 @@ public class ClearManager : MonoBehaviour
         {
             Debug.LogError($"ProcessType {type} does not exist in the progress dictionary.");
         }
-        SaveProgress(); // 進行度を保存
-    }
-    
-    // アイテムの取得状況を更新する
-    public void SetItems(ItemType type)
-    {
-        // 進行度を設定する
-        if (_items.ContainsKey(type))
-        {
-            // 完了済みにする
-            _items[type] = true;
-        }
-        else //念の為キーが存在しない場合のエラーハンドリング
-        {
-            Debug.LogError($"ProcessType {type} does not exist in the progress dictionary.");
-        }
-        SaveItems(); // 進行度を保存
+        Save(); // 進行度を保存
     }
 
     // 解決していないProcessTypeを一つ返す
