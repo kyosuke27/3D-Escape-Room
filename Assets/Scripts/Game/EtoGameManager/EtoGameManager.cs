@@ -13,7 +13,7 @@ public class EtoGameManager : MonoBehaviour
 
     // ゲームクリア時に表示するオブジェクト
     public GameObject ItemPanel;
-    
+
 
     void Update()
     {
@@ -51,5 +51,26 @@ public class EtoGameManager : MonoBehaviour
         // ここにアイテム取得の処理を追加する
         // 例えば、アイテムをインベントリに追加するなど
         ItemPanel.SetActive(true); // アイテムパネルをアクティブにする
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        // クリフラグを立てる
+        isClear = true;
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            tapObjects[i].SetIndex(ClearIndexs[i]);
+        }
+        
+        foreach (var tapObject in tapObjects)
+        {
+            // tapObjectを無効化する
+            tapObject.enabled = false;
+            // colliderを無効化する
+            tapObject.GetComponent<Collider>().enabled = false;
+        }
     }
 }

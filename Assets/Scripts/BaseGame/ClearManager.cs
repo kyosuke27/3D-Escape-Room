@@ -1,17 +1,20 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 //ゲームのクリア状態を保存しておくクラス
-
 // オブジェクトにアタッチして、進行度を管理するクラス
 // UserPrefabへの保存もかねる
 public class ClearManager : MonoBehaviour
 {
     // UserPrefabに保存するためのKey
     const string SAVE_KEY = "SaveData";
-    public SaveData saveData; // 保存用のデータクラス
+    // GameMangerを格納した配列
+    // Processtypeの順番に設定する
+    public GameObject[] GameManagers;
+
+    // 保存用のデータクラス
+    public SaveData saveData; 
 
     // 進行度を表す辞書
     // 中身に進行度のキーと、終わっているかのbool値が入っている
@@ -19,6 +22,7 @@ public class ClearManager : MonoBehaviour
     // 終了：true
     private Dictionary<ProcessType, bool> _progress = new();
     public static ClearManager Instance { get; private set; }
+
 
     // 辞書型の変数を初期化する
     private void Awake()
@@ -32,6 +36,7 @@ public class ClearManager : MonoBehaviour
             Destroy(gameObject);
         }
         print("_process" + _progress);
+       
     }
 
     void Start()
@@ -39,6 +44,92 @@ public class ClearManager : MonoBehaviour
         print("ClearManager Start");
         // セーブデータが存在する場合はロードする
         LoadProgress();
+
+        // 各GameManagerの初期化
+        foreach (var p in _progress)
+        {
+            // ProcessTypeの数だけループして進行度を設定
+            if (p.Value != false) // 未解決の場合
+            {
+                Clear(p.Key); // ゲームクリアの処理を呼び出す    
+            }
+        }
+    }
+
+    private void Clear(ProcessType p)
+    {
+        // ゲームがクリアしたとみなして処理を続ける
+                // それぞれのTypeごとに対応するクラスを探す
+                // クラスにはGameClear()メソッドがあることを前提とする
+                switch (p)
+                {
+                    // EtoGameの処理
+                    case ProcessType.EtoGame:
+                        EtoGameManager etoGameManager = GameManagers[(int)ProcessType.EtoGame].GetComponent<EtoGameManager>();
+                        etoGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.ArrowGame:
+                        // ArrowGameの処理をここに追加
+                        ArrowGameManager arrowGameManager = GameManagers[(int)ProcessType.ArrowGame].GetComponent<ArrowGameManager>();
+                        // arrowGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.StoneTouch:
+                        // StoneTouchの処理をここに追加
+                        StoneTouchManager stoneTouchManager = GameManagers[(int)ProcessType.StoneTouch].GetComponent<StoneTouchManager>();
+                        // stoneTouchManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.CupGame:
+                        // CupGameの処理をここに追加
+                        CupGameManager cupGameManager = GameManagers[(int)ProcessType.CupGame].GetComponent<CupGameManager>();
+                        // cupGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.WeatherGame:
+                        // WeatherGameの処理をここに追加
+                        WeatherGameManager weatherGameManager = GameManagers[(int)ProcessType.WeatherGame].GetComponent<WeatherGameManager>();
+                        // weatherGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.MoveBar:
+                        // MoveBarの処理をここに追加
+                        MoveBarManager moveBarManager = GameManagers[(int)ProcessType.MoveBar].GetComponent<MoveBarManager>();
+                        // moveBarManager.GameClear(); // ゲームクリア              
+                        break;
+                    case ProcessType.BlackUpGame:
+                        // BlackUpGameの処理をここに追加
+                        BlackUpGameManager blackUpGameManager = GameManagers[(int)ProcessType.BlackUpGame].GetComponent<BlackUpGameManager>();
+                        // blackUpGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.BirdStatue:
+                        // BirdStatueの処理をここに追加
+
+                        LastRoomSafeManager birdStatueManager = GameManagers[(int)ProcessType.BirdStatue].GetComponent<LastRoomSafeManager>();
+                        // birdStatueManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.CupPodPosition:
+                        // CupPodPositionの処理をここに追加
+                        CupPodManager cupPodPositionManager = GameManagers[(int)ProcessType.CupPodPosition].GetComponent<CupPodManager>();
+                        // cupPodPositionManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.TapDate:
+                        // TapDateの処理をここに追加
+                        TapDateManager tapDateManager = GameManagers[(int)ProcessType.TapDate].GetComponent<TapDateManager>();
+                        // tapDateManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.BigSmallCircle:
+                        // BigSmallCircleの処理をここに追加
+                        BigSmallCircleManager bigSmallCircleManager = GameManagers[(int)ProcessType.BigSmallCircle].GetComponent<BigSmallCircleManager>();
+                        // bigSmallCircleManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    case ProcessType.MarkGame:
+                        // MarkGameの処理をここに追加
+                        MarkButtonManager markGameManager = GameManagers[(int)ProcessType.MarkGame].GetComponent<MarkButtonManager>();
+                        // markGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                        break;
+                    // 他のProcessTypeに対する処理もここに追加する
+                    default:
+                        Debug.LogWarning($"ProcessType {p} does not have a specific clear action defined.");
+                        break;
+                }
+
     }
 
     // セーブデータをロードする
@@ -58,7 +149,8 @@ public class ClearManager : MonoBehaviour
                 // ProcessTypeの数だけループして進行度を設定
                 _progress[(ProcessType)i] = saveData.process[i];
             }
-        }else
+        }
+        else
         {
             // セーブデータが存在しない場合は初期化
             for (int i = 0; i < (int)ProcessType.LastProcessType; i++)
@@ -79,7 +171,7 @@ public class ClearManager : MonoBehaviour
         {
             saveData.process[i] = _progress[(ProcessType)i];
         }
-        
+
         // JSON形式に変換してPlayerPrefsに保存
         string json = JsonUtility.ToJson(saveData);
         PlayerPrefs.SetString(SAVE_KEY, json);
@@ -113,9 +205,9 @@ public class ClearManager : MonoBehaviour
             }
         }
         // 全て解決済みの場合はnullを返す
-        return null; 
+        return null;
     }
-    
+
 }
 
 [Serializable]
