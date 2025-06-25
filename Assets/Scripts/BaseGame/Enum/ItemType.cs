@@ -4,6 +4,8 @@ public enum ItemType
     BedRoomDoorKey,
     // 廊下のドアを開けるアイテム
     CorridorDoorKey,
+    // ベッドルームの金庫
+    BedRoomSafeKey,
     // ドライバー
     Driver,
     // リモコン
