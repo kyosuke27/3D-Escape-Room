@@ -28,4 +28,7 @@ public enum ProcessType
     BigSmallCircle,
     // 記号が付いたボタン
     MarkGame,
+    // ProcessTypeの最後の値
+    // 内部的にEnumの数を取得するために使用
+    LastProcessType
 }
