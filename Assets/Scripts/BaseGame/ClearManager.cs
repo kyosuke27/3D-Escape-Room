@@ -2,6 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Action
+{
+    public ActionType ActionType;  // アクションの種類
+
+    public GameObject[] ActionObjects;  // アクションに関連するGameObjectの配列
+ }
+
 //ゲームのクリア状態を保存しておくクラス
 // オブジェクトにアタッチして、進行度を管理するクラス
 // UserPrefabへの保存もかねる
@@ -31,7 +39,16 @@ public class ClearManager : MonoBehaviour
     // ItemTypeと取得しているか判定するためのbool値が入っている
     // 持っていない：　false
     // 持っている:true
+
+    public List<Action> ActionDict; // アイテムパネルのリスト
+
+    // Actiontypeで表示するオブジェクト
+    // 一つのオブジェクトに対して複数の値を格納することもあるので配列で宣言
+    private Dictionary<ActionType, GameObject[]> _showActionObject = new();
+
     private Dictionary<ItemType, bool> _items = new();
+
+    private Dictionary<ActionType, int> _actions = new(); // ActionTypeのアクションを管理するための辞書
     public static ClearManager Instance { get; private set; }
 
 
@@ -47,14 +64,18 @@ public class ClearManager : MonoBehaviour
             Destroy(gameObject);
         }
         print("_process" + _progress);
-
-    }
-
-    void Start()
-    {
-        print("ClearManager Start");
         // セーブデータが存在する場合はロードする
         Load();
+
+        // _showActionObjectを初期化
+        foreach (var pair in ActionDict)
+        {
+            GameObject[] actionObjects = pair.ActionObjects;
+            if (!_showActionObject.ContainsKey(pair.ActionType))
+            {
+                _showActionObject.Add(pair.ActionType, actionObjects);
+            }
+        }
 
         // 各GameManagerの初期化
         foreach (var p in _progress)
@@ -75,12 +96,84 @@ public class ClearManager : MonoBehaviour
                 GetItem(i.Key);
             }
         }
+        // Actionsの初期化
+        foreach (var a in _actions)
+        {
+            // ActionTypeの数だけループして進行度を設定
+            if (a.Value != 0) // 解決の場合(初期上からの変化があった場合)
+            {
+                // ActionTypeの値を設定する
+                GetAction(a.Key, a.Value);
+            }
+        }
+
     }
-    
+    private void GetAction(ActionType actionType, int value)
+    {
+        switch (actionType)
+        {
+            case ActionType.BedRoomDoor:
+                // EtoGameのアクションを取得
+                // 扉を開ける
+                if (value == 1)
+                {
+                    _showActionObject[ActionType.BedRoomDoor][0].SetActive(false); // 扉を開けるアクションを表示
+                    _showActionObject[ActionType.BedRoomDoor][1].SetActive(true); // 扉を開けるアクションを表示
+                }
+                break;
+            case ActionType.CorridorDoor:
+                if (value == 1)
+                {
+                    _showActionObject[ActionType.CorridorDoor][0].SetActive(false); // 扉を開けるアクションを表示
+                    _showActionObject[ActionType.CorridorDoor][1].SetActive(true); // 扉を開けるアクションを表示
+                }
+                break;
+            case ActionType.BedRoomSafe:
+                // 金庫を開ける
+                if(value == 1)
+                {
+                    _showActionObject[ActionType.BedRoomSafe][0].SetActive(false); // 金庫を開けるアクションを表示
+                    _showActionObject[ActionType.BedRoomSafe][1].SetActive(true); // 金庫を開けるアクションを表示
+                }
+                // 金庫の中身を取り出す
+                else if (value == 2)
+                {
+                    _showActionObject[ActionType.BedRoomSafe][1].SetActive(false); // 金庫を開けるアクションを非表示
+                    _showActionObject[ActionType.BedRoomSafe][2].SetActive(true); // 金庫の中身を取り出すアクションを表示
+                    _showActionObject[ActionType.BedRoomSafe][3].SetActive(false); // 金庫の中身を取り出すアクションを表示
+                }
+                break;
+            case ActionType.TV:
+                // CupGameのアクションを取得
+                break;
+            case ActionType.BedRoomDrawer:
+                // WeatherGameのアクションを取得
+                break;
+            case ActionType.WineGlass:
+                // MoveBarのアクションを取得
+                break;
+            case ActionType.Ball:
+                // BlackUpGameのアクションを取得
+                break;
+            case ActionType.SilverBirdStatue:
+                // BirdStatueのアクションを取得
+                break;
+            case ActionType.GoldBirdStatue:
+                // CupPodPositionのアクションを取得
+                break;
+            case ActionType.WhiteMugCup:
+                // TapDateのアクションを取得
+                break;
+            case ActionType.LastActionKey:
+                // BigSmallCircleのアクションを取得
+                break;
+        }
+    }
+
     // アイテムを持っているのでパネルを表示する
     private void GetItem(ItemType itemType)
     {
-        switch(itemType)
+        switch (itemType)
         {
             case ItemType.BedRoomDoorKey:
                 ItemPanels[(int)ItemType.BedRoomDoorKey].SetActive(true);
@@ -223,11 +316,18 @@ public class ClearManager : MonoBehaviour
                 // ProcessTypeの数だけループして進行度を設定
                 _progress[(ProcessType)i] = saveData.process[i];
             }
+
             // Itemsを初期化する
             for (int i = 0; i < (int)ItemType.LastItemKey; i++)
             {
                 // ProcessTypeの数だけループして進行度を設定
                 _items[(ItemType)i] = saveData.items[i];
+            }
+
+            for (int i = 0; i < (int)ActionType.LastActionKey; i++)
+            {
+                // ActionTypeの数だけループして進行度を設定
+                _actions[(ActionType)i] = saveData.actions[i];
             }
         }
         else
@@ -242,6 +342,11 @@ public class ClearManager : MonoBehaviour
             {
                 // ProcessTypeの数だけループして進行度を設定
                 _items[(ItemType)i] = false;
+            }
+            for (int i = 0; i < (int)ActionType.LastActionKey; i++)
+            {
+                // ActionTypeの数だけループして進行度を設定
+                _actions[(ActionType)i] = 0; // 全て未解決に設定
             }
             Save(); // 初期化後にセーブ
         }
@@ -296,7 +401,21 @@ public class ClearManager : MonoBehaviour
         string json = JsonUtility.ToJson(saveData);
         PlayerPrefs.SetString(SAVE_KEY, json);
     }
+    // SaveDataを保存する
+    // Actinsデータのみ保存する
+    public void SaveActions()
+    {
+        print("ClearManager Save Actions");
+        // SaveDataのprocess配列に進行度を保存
+        for (int i = 0; i < (int)ActionType.LastActionKey; i++)
+        {
+            saveData.actions[i] = _actions[(ActionType)i];
+        }
 
+        // JSON形式に変換してPlayerPrefsに保存
+        string json = JsonUtility.ToJson(saveData);
+        PlayerPrefs.SetString(SAVE_KEY, json);
+    }
     // 進行度を更新
     public void SetProgress(ProcessType type)
     {
@@ -314,13 +433,13 @@ public class ClearManager : MonoBehaviour
     }
 
     // アイテムの取得状況を更新する
-    public void SetItems(ItemType type)
+    public void SetItems(ItemType type, bool condition)
     {
         // 進行度を設定する
         if (_items.ContainsKey(type))
         {
             // 完了済みにする
-            _items[type] = true;
+            _items[type] = condition;
         }
         else //念の為キーが存在しない場合のエラーハンドリング
         {
@@ -329,6 +448,20 @@ public class ClearManager : MonoBehaviour
         SaveItems(); // 進行度を保存
     }
 
+    // ActionTypeの値を更新する
+    public void SetAction(ActionType actionType, int value)
+    {
+        print("ClearManager SetAction==================");
+        print("ActionType: " + actionType + ", Value: " + value);
+        print("Current Action Value: " + GetActionValue(actionType));
+        // ActionTypeの値を設定する
+        if (_actions.ContainsKey(actionType))
+        {
+            // 値を更新
+            _actions[actionType] = value;
+        }
+        SaveActions(); // ActionTypeの値を保存
+    }
     // 解決していないProcessTypeを一つ返す
     public ProcessType? GetUnsolvedProcessType()
     {
@@ -358,6 +491,12 @@ public class ClearManager : MonoBehaviour
         }
         return items.ToArray(); // リストを配列に変換して返す
     }
+
+    // ActionTypeを指定して値を取得する
+    public int GetActionValue(ActionType actionType)
+    {
+        return _actions[actionType]; // ActionTypeの値を返す    
+    }
 }
 
 [Serializable]
@@ -365,4 +504,5 @@ public class SaveData
 {
     public bool[] process = new bool[(int)ProcessType.LastProcessType];  // アイテム取得状況を管理
     public bool[] items = new bool[(int)ItemType.LastItemKey];  // アイテム取得状況を管理
+    public int[] actions = new int[(int)ActionType.LastActionKey];  // アイテム取得状況を管理
 }

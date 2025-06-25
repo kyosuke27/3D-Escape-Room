@@ -9,7 +9,16 @@ public class TapItemUse : TapColider
     // アイテムをタップした際に表示するオブオブジェクト
     // 使いやすいように配列に入れておく
     public GameObject[] ActiveObjects;
+
+    // 使用したアイテムを識別するためにItemTypsを設定する
+    public ItemType ItemType;
     
+    // ActionTypeを設定する
+    public ActionType ActionType;
+    // Actionが起きた後の値を設定する
+    // Actionごとに個別に設定する
+    public int ActionValue;
+   
     protected override void OnTap()
     {
         base.OnTap();
@@ -26,7 +35,10 @@ public class TapItemUse : TapColider
                 foreach (var obj in ActiveObjects)
                 {
                     obj.SetActive(true);
-                }        
+                }
+                // アイテムの使用を通知する
+                ClearManager.Instance.SetItems(ItemType, false);
+                ClearManager.Instance.SetAction(ActionType, ActionValue);
             }
         }
     }

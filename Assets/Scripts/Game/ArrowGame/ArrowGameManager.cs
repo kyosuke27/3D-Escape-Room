@@ -28,6 +28,7 @@ public class ArrowGameManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        ClearManager.Instance.SetItems(ItemType.CorridorDoorKey, true); // 廊下のドアを開けるアイテムを取得したことを通知
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {

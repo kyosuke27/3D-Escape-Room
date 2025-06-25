@@ -34,7 +34,7 @@ public class EtoGameManager : MonoBehaviour
         isClear = true;
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType);
-        ClearManager.Instance.SetItems(ItemType.BedRoomDoorKey); // ベッドルームのドアを開けるアイテムを取得したことを通知
+        ClearManager.Instance.SetItems(ItemType.BedRoomDoorKey,true); // ベッドルームのドアを開けるアイテムを取得したことを通知
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
