@@ -30,6 +30,7 @@ public class StoneTouchManager : GameManagerBase
         // ここから先はクリアしている場合
         _isCleared = true; // クリアフラグを立てる
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        ClearManager.Instance.SetItems(ItemType.BedRoomSafeKey, true); // ベッドルームの金庫を開けるアイテムを取得したことを通知
         foreach (var tapObject in CheckBallObjects)
         {
             // tapObjectを無効化する

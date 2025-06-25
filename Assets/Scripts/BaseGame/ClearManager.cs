@@ -238,7 +238,7 @@ public class ClearManager : MonoBehaviour
             case ProcessType.ArrowGame:
                 // ArrowGameの処理をここに追加
                 ArrowGameManager arrowGameManager = GameManagers[(int)ProcessType.ArrowGame].GetComponent<ArrowGameManager>();
-                // arrowGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                arrowGameManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.StoneTouch:
                 // StoneTouchの処理をここに追加

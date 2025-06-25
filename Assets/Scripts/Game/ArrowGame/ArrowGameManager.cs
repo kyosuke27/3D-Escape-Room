@@ -5,7 +5,7 @@ public class ArrowGameManager : GameManagerBase
     // クリアしてやじ矢印のインデックス
     // >:0,<:1
     public int[] ClearIndexs;
-    
+
     // 判定する対象の矢印オブジェクト
     public TapObjectChange[] tapObjects;
 
@@ -40,7 +40,7 @@ public class ArrowGameManager : GameManagerBase
         GetClear(); // アイテム取得などの処理を呼び出す
 
     }
-    
+
     protected override void GetClear()
     {
         // ここにアイテム取得の処理を追加する
@@ -48,6 +48,26 @@ public class ArrowGameManager : GameManagerBase
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            tapObjects[i].SetIndex(ClearIndexs[i]);
+        }
+        // オブジェクトを無効化する
+        foreach (var tapObject in tapObjects)
+        {
+            // tapObjectを無効化する
+            tapObject.enabled = false;
+            // colliderを無効化する
+            tapObject.GetComponent<Collider>().enabled = false;
         }
     }
 }

@@ -15,6 +15,14 @@ public class TapItemUseMove : TapColider
     
     public string MovePositionName; // 移動先の位置の名前
     
+    // 使用したアイテムを識別するためにItemTypsを設定する
+    public ItemType ItemType;
+    // ActionTypeを設定する
+    public ActionType ActionType;
+    // Actionが起きた後の値を設定する
+    // Actionごとに個別に設定する
+    public int ActionValue;
+    
     protected override void OnTap()
     {
         base.OnTap();
@@ -34,7 +42,8 @@ public class TapItemUseMove : TapColider
                     obj.SetActive(true);
                 }
                 // Camraの移動
-                CameraManager.Instance.ChangeCameraPosition(MovePositionName); // カメラを指定した位置に移動させる
+                ClearManager.Instance.SetItems(ItemType, false); // アイテムの使用を通知する
+                ClearManager.Instance.SetAction(ActionType, ActionValue); // Actionの通知
             }
         }
     }
