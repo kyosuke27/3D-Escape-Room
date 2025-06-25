@@ -18,7 +18,7 @@ public class StoneTouchManager : GameManagerBase
     {
         if (_isCleared) return; // クリアしている場合は何もしない
 
-        for( int i = 0; i < CheckBallIndexs.Length; i++)
+        for (int i = 0; i < CheckBallIndexs.Length; i++)
         {
             // チェックするボールのIndexがCheckBallIndexsと等しいか確認する
             if (CheckBallObjects[i].Index != CheckBallIndexs[i])
@@ -40,7 +40,7 @@ public class StoneTouchManager : GameManagerBase
         }
         GetClear(); // アイテム取得などの処理を呼び出す
     }
-    
+
     protected override void GetClear()
     {
         Debug.Log("StoneTouchManager: GetClear called");
@@ -49,6 +49,24 @@ public class StoneTouchManager : GameManagerBase
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        _isCleared = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < CheckBallObjects.Length; i++)
+        {
+            CheckBallObjects[i].SetMaterialIndex(CheckBallIndexs[i]);  // 正解のIndexに設定
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in CheckBallObjects)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する 
         }
     }
 }

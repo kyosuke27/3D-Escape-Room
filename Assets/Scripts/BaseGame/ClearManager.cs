@@ -138,9 +138,9 @@ public class ClearManager : MonoBehaviour
                 // 金庫の中身を取り出す
                 else if (value == 2)
                 {
-                    _showActionObject[ActionType.BedRoomSafe][1].SetActive(false); // 金庫を開けるアクションを非表示
-                    _showActionObject[ActionType.BedRoomSafe][2].SetActive(true); // 金庫の中身を取り出すアクションを表示
-                    _showActionObject[ActionType.BedRoomSafe][3].SetActive(false); // 金庫の中身を取り出すアクションを表示
+                    _showActionObject[ActionType.BedRoomSafe][0].SetActive(false); // 金庫を開けるアクションを非表示
+                    _showActionObject[ActionType.BedRoomSafe][1].SetActive(true); // 金庫の中身を取り出すアクションを表示
+                    _showActionObject[ActionType.BedRoomSafe][2].SetActive(false); // 金庫の中身を取り出すアクションを表示
                 }
                 break;
             case ActionType.TV:
@@ -243,7 +243,7 @@ public class ClearManager : MonoBehaviour
             case ProcessType.StoneTouch:
                 // StoneTouchの処理をここに追加
                 StoneTouchManager stoneTouchManager = GameManagers[(int)ProcessType.StoneTouch].GetComponent<StoneTouchManager>();
-                // stoneTouchManager.GameClear(); // ゲームクリアの処理を呼び出す
+                stoneTouchManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.CupGame:
                 // CupGameの処理をここに追加
