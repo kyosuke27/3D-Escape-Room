@@ -7,6 +7,9 @@ public class MarkButtonManager : GameManagerBase
 
     // 判定する対象のオブジェクト
     public TapObjectChange[] tapObjects;
+    
+    // 非表示にするアイテムパネル
+    public GameObject[] DeleteItemPanel;
 
     // Update is called once per frame
     void Update()
@@ -25,6 +28,10 @@ public class MarkButtonManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // 最後の鍵を取得
+        ClearManager.Instance.SetItems(ItemType.LastRoomOutKey, true); // MarkButtonの最後の鍵を取得したことを通知
+        // 記号メモを非表示
+        ClearManager.Instance.SetItems(ItemType.MarkMemo, false); // MarkButtonの記号メモを非表示にする
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
@@ -36,7 +43,7 @@ public class MarkButtonManager : GameManagerBase
 
         GetClear(); // アイテム取得などの処理を呼び出す
     }
-    
+
     protected override void GetClear()
     {
         Debug.Log("MarkButtonManager: GetClear called");
@@ -45,6 +52,30 @@ public class MarkButtonManager : GameManagerBase
         foreach (var itemPanel in ItemPanel)
         {
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
+        }
+        // 非表示にするオブジェクトを非アクティブにする
+        foreach (var itemPanel in ItemPanel)
+        {
+            itemPanel.SetActive(false); // オブジェクトを非アクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            // tapObjectsのIndexをClearIndexsに設定する
+            tapObjects[i].SetIndex(ClearIndexs[i]);
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in tapObjects)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する
         }
     }
 }

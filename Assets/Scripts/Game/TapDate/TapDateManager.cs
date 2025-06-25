@@ -7,7 +7,7 @@ public class TapDateManager : GameManagerBase
 
     // 判定する対象のオブジェクト
     public TapObjectChange[] tapObjects;
-    
+
     // 削除するオブジェクト
     public GameObject[] deleteObjects;
 
@@ -28,6 +28,10 @@ public class TapDateManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // クリアした際にボールが手に入るので通知する
+        ClearManager.Instance.SetItems(ItemType.Ball, true); // TapDateのボール
+        // 日付メモは非表示にする
+        ClearManager.Instance.SetItems(ItemType.DateMemo, false); // TapDateのメモを非表示にする
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
@@ -54,6 +58,25 @@ public class TapDateManager : GameManagerBase
         foreach (var deleteObject in deleteObjects)
         {
             deleteObject.SetActive(false); // オブジェクトを非アクティブにする
+        }
+    }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提  
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            // tapObjectsのIndexをCorrectValuesに設定する
+            tapObjects[i].SetIndex(CorrectValues[i]);
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in tapObjects)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する
         }
     }
 }

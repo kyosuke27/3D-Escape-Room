@@ -165,7 +165,24 @@ public class ClearManager : MonoBehaviour
                 }
                 break;
             case ActionType.BedRoomDrawer:
-                // WeatherGameのアクションを取得
+                // ベッドルームの引き出しのアクションを変化
+                if(value == 1)
+                {
+                    // 引き出しが開いている
+                    // 引き出しを非表示
+                    _showActionObject[ActionType.BedRoomDrawer][0].SetActive(false); // 引き出しを開けるアクションを非表示
+                    // 開いている引き出しを表示
+                    _showActionObject[ActionType.BedRoomDrawer][1].SetActive(true); // 引き出しを開けるアクションを表示
+                }
+                else if (value == 2)
+                {
+                    // 引き出しの中身を取り出す
+                    _showActionObject[ActionType.BedRoomDrawer][0].SetActive(false); // 引き出しを開けるアクションを非表示
+                    // 開いている引き出しを非表示
+                    _showActionObject[ActionType.BedRoomDrawer][1].SetActive(true); // 引き出しの中身を取り出すアクションを表示
+                    // 中身を非表示
+                    _showActionObject[ActionType.BedRoomDrawer][2].SetActive(false); // 引き出しの中身を取り出すアクションを表示
+                }
                 break;
             case ActionType.WineGlass:
                 // ワイングラスの初期設定
@@ -179,7 +196,12 @@ public class ClearManager : MonoBehaviour
                 }
                 break;
             case ActionType.Ball:
-                // BlackUpGameのアクションを取得
+                // ボールの初期設定
+                if (value == 1)
+                {
+                    // ボールが置かれている
+                    _showActionObject[ActionType.Ball][0].SetActive(true); // ボールが置かれているアクションを表示
+                }
                 break;
             case ActionType.SilverBirdStatue:
                 // 銀の鳥の像が置かれている場合
@@ -319,17 +341,17 @@ public class ClearManager : MonoBehaviour
             case ProcessType.TapDate:
                 // TapDateの処理をここに追加
                 TapDateManager tapDateManager = GameManagers[(int)ProcessType.TapDate].GetComponent<TapDateManager>();
-                // tapDateManager.GameClear(); // ゲームクリアの処理を呼び出す
+                tapDateManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.BigSmallCircle:
                 // BigSmallCircleの処理をここに追加
                 BigSmallCircleManager bigSmallCircleManager = GameManagers[(int)ProcessType.BigSmallCircle].GetComponent<BigSmallCircleManager>();
-                // bigSmallCircleManager.GameClear(); // ゲームクリアの処理を呼び出す
+                bigSmallCircleManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             case ProcessType.MarkGame:
                 // MarkGameの処理をここに追加
                 MarkButtonManager markGameManager = GameManagers[(int)ProcessType.MarkGame].GetComponent<MarkButtonManager>();
-                // markGameManager.GameClear(); // ゲームクリアの処理を呼び出す
+                markGameManager.GameClear(); // ゲームクリアの処理を呼び出す
                 break;
             // 他のProcessTypeに対する処理もここに追加する
             default:
@@ -474,16 +496,11 @@ public class ClearManager : MonoBehaviour
     // アイテムの取得状況を更新する
     public void SetItems(ItemType type, bool condition)
     {
-        print("ClearManager SetItems==================");
-        print("ItemType: " + type + ", Condition: " + condition);
-        print("Current Item Value: " + _items[type]);
         // 進行度を設定する
         if (_items.ContainsKey(type))
         {
-            print("ClearManager SetItems: " + type + " is set to " + condition);
             // 完了済みにする
             _items[type] = condition;
-            print("_items[" + type + "] = " + _items[type]);
         }
         else //念の為キーが存在しない場合のエラーハンドリング
         {
@@ -495,9 +512,6 @@ public class ClearManager : MonoBehaviour
     // ActionTypeの値を更新する
     public void SetAction(ActionType actionType, int value)
     {
-        print("ClearManager SetAction==================");
-        print("ActionType: " + actionType + ", Value: " + value);
-        print("Current Action Value: " + GetActionValue(actionType));
         // ActionTypeの値を設定する
         if (_actions.ContainsKey(actionType))
         {
@@ -522,18 +536,17 @@ public class ClearManager : MonoBehaviour
 
     // 取得しているアイテムを取得する
     // 先頭から確認して最初にtrueのものを取得する
-    public ItemType[] GetItems()
+    public ItemType GetItems()
     {
-        List<ItemType> items = new List<ItemType>();
         foreach (var kvp in _items)
         {
             // trueのもの
             if (kvp.Value) // 取得しているアイテムをリストに追加
             {
-                items.Add(kvp.Key);
+                return kvp.Key;
             }
         }
-        return items.ToArray(); // リストを配列に変換して返す
+        return ItemType.LastItemKey; // リストを配列に変換して返す
     }
 
     // ActionTypeを指定して値を取得する

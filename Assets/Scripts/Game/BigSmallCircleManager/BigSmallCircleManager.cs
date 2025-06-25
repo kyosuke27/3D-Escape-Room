@@ -26,6 +26,8 @@ public class BigSmallCircleManager : GameManagerBase
         isClear = true; // クリアフラグを立てる
         // クリアしたことを通知する
         ClearManager.Instance.SetProgress(processType); // ClearManagerに進行度を通知する
+        // 記号メモを取得する
+        ClearManager.Instance.SetItems(ItemType.MarkMemo, true); // BigSmallCircleの記号メモを取得したことを通知
         // ブロックを非活性にする
         foreach (var tapObject in tapObjects)
         {
@@ -38,7 +40,7 @@ public class BigSmallCircleManager : GameManagerBase
         GetClear(); // アイテム取得などの処理を呼び出す
 
     }
-    
+
     protected override void GetClear()
     {
         Debug.Log("BigSmallCircleManager: GetClear called");
@@ -49,4 +51,24 @@ public class BigSmallCircleManager : GameManagerBase
             itemPanel.SetActive(true); // アイテムパネルをアクティブにする
         }
     }
+
+    // ゲームクリアの処理
+    // ClearManagerから呼ばれることが前提
+    public void GameClear()
+    {
+        isClear = true; // クリアフラグを立てる
+        // Tapするパネルを正解のパネルにする
+        for (int i = 0; i < tapObjects.Length; i++)
+        {
+            // tapObjectsのIndexをClearIndexsに設定する
+            tapObjects[i].SetIndex(ClearIndexs[i]);
+        }
+        // オブジェクトを非アクティブにする
+        foreach (var tapObject in tapObjects)
+        {
+            tapObject.enabled = false; // tapObjectを無効化する
+            tapObject.GetComponent<Collider>().enabled = false; // colliderを無効化する
+        }
+    }
+            
 }
